@@ -28,17 +28,15 @@ function onSubmit(evt) {
   const delay = Number(delayInput.value);
   const step = Number(stepInput.value);
   const amount = Number(amountInput.value);
-  setTimeout(evt => {
-    for (let i = 0; i < amount; i += 1) {
-      const position = i + 1;
-      createPromise(position, delay + step * i)
-        .then(({ position, delay }) => {
-          Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-        })
-        .catch(({ position, delay }) => {
-          Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-        });
-    }
-  }, delay);
+  for (let i = 0; i < amount; i += 1) {
+    const position = i + 1;
+    createPromise(position, delay + step * i)
+      .then(({ position, delay }) => {
+        Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+      })
+      .catch(({ position, delay }) => {
+        Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+      });
+  }
   evt.currentTarget.reset();
 }
