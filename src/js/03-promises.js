@@ -29,8 +29,9 @@ function onSubmit(evt) {
   const step = Number(stepInput.value);
   const amount = Number(amountInput.value);
   setTimeout(evt => {
-    for (let position = 1; position <= amount; position += 1) {
-      createPromise(position, delay + step * position)
+    for (let i = 0; i < amount; i += 1) {
+      const position = i + 1;
+      createPromise(position, delay + step * i)
         .then(({ position, delay }) => {
           Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
         })
